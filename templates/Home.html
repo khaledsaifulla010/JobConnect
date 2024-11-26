@@ -1,0 +1,302 @@
+{% extends 'Base.html' %} {% load static %} {% block content %}
+
+<!-- Import Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .slider_area {
+    background-color: #005f73;
+    padding: 80px 0;
+    color: #fff;
+  }
+
+  .slider_text h5 {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #ffe66d;
+  }
+
+  .slider_text h3 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 10px 0;
+    color: #fff;
+  }
+
+  .slider_text p {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .catagory_area {
+    background-color: #edf6f9;
+    padding: 40px 0;
+  }
+
+  .single_input input {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 14px;
+  }
+
+  .job_btn button {
+    background-color: #005f73;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .job_btn button:hover {
+    background-color: #0a9396;
+  }
+
+  .popular_catagory_area {
+    padding: 60px 0;
+  }
+
+  .section_title h3 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    color: #333;
+  }
+
+  .single_catagory {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px 0;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .single_catagory:hover {
+    background-color: #e0fbfc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .single_catagory a h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #005f73;
+  }
+
+  .job_listing_area {
+    padding: 60px 0;
+  }
+
+  .single_jobs {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .single_jobs:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .jobs_left img {
+    border-radius: 10px;
+  }
+
+  .jobs_conetent h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #005f73;
+  }
+
+  .apply_now a {
+    background-color: #005f73;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .apply_now a:hover {
+    background-color: #0a9396;
+  }
+
+  .job_searcing_wrap {
+    background-color: #005f73;
+    padding: 50px 0;
+    color: #fff;
+  }
+
+  .job_searcing_wrap h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffe66d;
+  }
+
+  .job_searcing_wrap p {
+    font-size: 16px;
+    margin: 10px 0 20px;
+  }
+
+  .job_searcing_wrap a {
+    background-color: #ffe66d;
+    color: #005f73;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .job_searcing_wrap a:hover {
+    background-color: #fff;
+  }
+</style>
+
+<!-- Slider Area -->
+<div class="slider_area">
+  <div class="single_slider d-flex align-items-center">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 col-md-6">
+          <div class="slider_text">
+            <h5>Discover Your Dream Job!</h5>
+            <h3>Unlock Your Perfect Career Path!</h3>
+            <p>
+              We provide online instant cash loans with quick approval that suit
+              your term length
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Category Area -->
+<div class="catagory_area">
+  <div class="container">
+    <form class="row cat_search" method="POST" action="{% url 'search-job' %}">
+      {% csrf_token %}
+      <div class="col-lg-8 col-md-4">
+        <div class="single_input">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search keyword"
+            name="keyword"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <div class="job_btn">
+          <button type="submit">Find Job</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Popular Category Area -->
+<div class="popular_catagory_area">
+  <div class="container">
+    <div class="section_title">
+      <h3>Categories</h3>
+    </div>
+    {% if categories %}
+    <div class="row">
+      {% for category in categories %}
+      <div class="col-lg-4 col-xl-3 col-md-6">
+        <div class="single_catagory">
+          <a href="{% url 'category-jobs' category.category %}#job_list">
+            <h4>{{ category.category }}</h4>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Job Listing Area -->
+<div class="job_listing_area">
+  <div class="container">
+    <div class="section_title">
+      <h3>Latest Job Listings</h3>
+    </div>
+    {% if jobs %}
+    <div class="job_lists mt-5">
+      <div class="row">
+        {% for job in jobs %}
+        <div class="col-lg-12">
+          <div class="single_jobs">
+            <div class="jobs_left d-flex align-items-center">
+              <img
+                src="{{ job.photo.url }}"
+                alt="Job Photo"
+                width="75"
+                height="75"
+              />
+              <div class="jobs_conetent ml-3">
+                <h4>{{ job.title }}</h4>
+                <p>
+                  <i class="fa fa-map-marker"></i> {{ job.location }} |
+                  <i class="fa fa-clock-o"></i> {{ job.job_type }}
+                </p>
+              </div>
+            </div>
+            <div class="jobs_right">
+              <a href="{% url 'job-details' job.id %}" class="apply_now"
+                >View Details</a
+              >
+              <p>Deadline: {{ job.deadline }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <p>No jobs available now.</p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Job Searching Wrap -->
+<div class="job_searcing_wrap">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h3>Looking for a Job?</h3>
+        <p>We provide online instant cash loans with quick approval</p>
+        <a href="{% url 'jobs' '-published' %}">Browse Jobs</a>
+      </div>
+      <div class="col-lg-6">
+        <h3>Looking for an Expert?</h3>
+        <p>We provide online instant cash loans with quick approval</p>
+        <a href="{% url 'contact' %}">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
