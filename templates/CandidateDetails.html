@@ -1,0 +1,158 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block extra-styles %}
+    <link rel="stylesheet" href="{% static 'css/Profile.css' %}">
+    <style>
+        /* Custom styles for profile page */
+        .bradcam_area {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .bradcam_text h3 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .job_details_area {
+            padding: 40px 0;
+            background-color: #f8f9fa;
+        }
+
+        .job_sumary {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .job_content .input, .job_content .textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .job_content .input[disabled], .job_content .textarea[disabled] {
+            background-color: #f1f1f1;
+        }
+
+        .job_content .input[type="text"], .job_content .input[type="email"] {
+            font-size: 16px;
+        }
+
+        .job_content textarea {
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        /* Circular Image for Profile */
+        .job_content .rounded {
+            border-radius: 300%;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #908d92;
+        }
+
+        /* Resume Button Styled as Button */
+        .resume-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #6a11cb;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            width: auto;  /* Don't make the button full width */
+            text-align: center;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .resume-button:hover {
+            background-color: #2575fc;
+        }
+
+        .text-danger {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Candidate Details{% endblock %}
+
+{% block content %}
+<!-- header -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Candidate Profile</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ header -->
+
+<!-- Form starts here -->
+{% if candidate %}
+<div class="job_details_area">
+    <div class="container">
+        <form class="row" method="POST">
+            <!-- Personal Info -->
+            <div class="col-lg-6">
+                <div class="job_sumary">
+                    <div class="job_content text-center">
+                        <a href="{{ candidate.photo.url }}">
+                            <img src="{{ candidate.photo.url }}" alt="Candidate Photo" class="rounded">
+                        </a>
+                        <input type="text" name="username" placeholder="{{ candidate.user.username }}" class="input mt-3" disabled>
+                        <input type="email" name="email" placeholder="{{ candidate.user.email }}" class="input" disabled>
+                        <input type="text" name="phone" placeholder="{{ candidate.phone_number }}" class="input" disabled>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" onfocus="this.type='date'" onblur="this.type='text'" name="dob" placeholder="{{ candidate.dob }}" class="input" disabled>
+                                </div>
+                                <div class="col">
+                                    <input type="text" name="gender" placeholder="{{ candidate.gender }}" class="input" disabled>
+                                </div>
+                            </div>
+                        </div>
+
+                        <textarea placeholder="{{ candidate.address }}" rows="3" name="address" class="textarea" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- Official Info -->
+            <div class="col-lg-6">
+                <div class="job_sumary">
+                    <div class="job_content text-center">
+                        <input type="text" name="current_company" placeholder="{{ candidate.current_company }}" class="input" disabled>
+                        <input type="text" name="current_role" placeholder="{{ candidate.current_role }}" class="input" disabled>
+                        <textarea rows="3" name="skills" placeholder="{{ candidate.skills }}" class="textarea" disabled></textarea>
+                        <input type="url" name="portfolio_link" placeholder="{{ candidate.portfolio_link }}" class="input" disabled>
+                        <input type="number" name="experience_on_field" placeholder="{{ candidate.experience_on_field }}" class="input" disabled>
+
+                        <!-- Resume Button styled as Button -->
+                        <a href="{{ candidate.resume.url }}" class="resume-button" target="_blank">View Resume</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% else %}
+<h1 class="text-danger text-center my-5">Something is Wrong</h1>
+{% endif %}
+<!-- Form ends here -->
+
+{% endblock %}
