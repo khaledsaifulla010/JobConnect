@@ -1,0 +1,164 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block extra-styles %}
+    <style>
+        /* Global Style */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .bradcam_area {
+            background: linear-gradient(135deg, #6f42c1, #4e2a84);
+            padding: 60px 0;
+        }
+
+        .bradcam_text h3 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Profile Form Styling */
+        form {
+            background-color: #fff;
+            border-radius: 25px; /* Increased border-radius for rounded corners */
+            box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Form Elements */
+        .input, .textarea {
+            width: 100%;
+            padding: 14px; /* Increased padding for better spacing */
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 30px; /* More rounded inputs */
+            background-color: #f7f7f7;
+            margin-bottom: 20px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .input:focus, .textarea:focus {
+            border-color: #6f42c1;
+            box-shadow: 0 0 10px rgba(111, 66, 193, 0.2);
+            outline: none;
+        }
+
+        .textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .input[disabled], .textarea[disabled] {
+            background-color: #e9ecef;
+            color: #b0b0b0;
+        }
+
+        /* Submit Button */
+        .boxed-btn3 {
+            background-color: #6f42c1;
+            color: white;
+            padding: 14px 30px;
+            border-radius: 30px; /* Rounded button */
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .boxed-btn3:hover {
+            background-color: #563085;
+        }
+
+        /* Form Title */
+        .form-header h3 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: #4e2a84;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Section Containers */
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .bradcam_area {
+                padding: 40px 0;
+            }
+
+            form {
+                width: 90%;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    Profile Form
+{% endblock %}
+
+{% block content %}
+<!-- header  -->
+    <div class="bradcam_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Edit Profile</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--/ header  -->
+
+<!-- form starts here -->
+<form action="" method="Post" enctype="multipart/form-data" class="text-center container">
+    {% csrf_token %}
+    
+    <div class="form-header">
+        <h3>Edit your profile</h3>
+    </div>
+
+    {% if candidate_form %}
+        <div class="form-section">
+            {{ candidate_form.as_p }}
+        </div>
+    {% endif %}
+    
+    {% if recruiter_form %}
+        <div class="form-section">
+            {{ recruiter_form }}
+        </div>
+    {% endif %}
+    
+    <button type="submit" class="boxed-btn3">Complete</button>
+</form>
+<!-- form ends here -->
+
+{% endblock %}
