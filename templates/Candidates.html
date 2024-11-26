@@ -1,0 +1,114 @@
+{% extends 'Base.html' %} {% load static %} {% block extra-styles %}
+<link rel="stylesheet" href="{% static 'css/slick.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+/>
+<style>
+  .bradcam_area {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    padding: 60px 0;
+    color: #fff;
+    text-align: center;
+  }
+
+  .bradcam_text h3 {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .featured_candidates_area {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+  }
+
+  .single_candidates {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .single_candidates:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .single_candidates .thumb {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #e9ecef;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .single_candidates .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .single_candidates h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #333;
+  }
+
+  .none-text {
+    font-size: 24px;
+    color: #6a11cb;
+    font-weight: bold;
+  }
+</style>
+{% endblock %} {% block title %}Candidates{% endblock %} {% block content %}
+<!-- bradcam_area -->
+<div class="bradcam_area bradcam_bg_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="bradcam_text">
+          <h3>Candidates</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ bradcam_area -->
+
+<!-- featured_candidates_area_start -->
+<div class="featured_candidates_area candidate_page_padding">
+  {% if candidates %}
+  <div class="container">
+    <div class="row g-4">
+      {% for candidate in candidates %}
+      <div class="col-md-6 col-lg-3">
+        <a
+          href="{% url 'candidate_details' candidate.id %}"
+          class="text-decoration-none"
+        >
+          <div class="single_candidates">
+            <div class="thumb">
+              <img
+                src="{{ candidate.photo.url }}"
+                alt="{{ candidate.user.username }}"
+              />
+            </div>
+            <h4>{{ candidate.user.username }}</h4>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <h1 class="text-center mt-5 mb-5 none-text">No Candidates Found</h1>
+  {% endif %}
+</div>
+<!-- featured_candidates_area_end -->
+{% endblock %}
