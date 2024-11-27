@@ -1,0 +1,90 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block extra-styles %}
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <style>
+        /* Custom Styles */
+        .bradcam_area {
+            background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+            padding: 80px 0;
+            color: white;
+        }
+
+        .bradcam_text h3 {
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-body h3 {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .img-thumbnail {
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .img-thumbnail:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1140px;
+        }
+
+        @media (max-width: 768px) {
+            .bradcam_text h3 {
+                font-size: 32px;
+            }
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+    About Us | JobConnect
+{% endblock %}
+
+{% block content %}
+<!-- header  -->
+    <div class="bradcam_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>About Me</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--/ header  -->
+
+<!-- About Card Section -->
+<div class="card m-5">
+    <div class="card-body text-center d-flex justify-content-around align-items-center">
+        <div class="col-lg-3">
+            <img src="{% static 'img/khaled.jpg' %}" class="img-thumbnail" alt="Khaled Saifulla" width="200px" height="200px">
+            <h3>Khaled Saifulla</h3>
+            <p class="mt-3 text-muted">A passionate Front-End Web Developer specializing in React, JavaScript, and more.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
