@@ -1,0 +1,92 @@
+{% extends 'Base.html' %}
+{% load static %}
+
+{% block extra-styles %}
+<style>
+  /* General Styles */
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bradcam_area {
+    background-color: #6a11cb;
+    padding: 60px 0;
+    text-align: center;
+    color: #fff;
+  }
+
+  .bradcam_text h3 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  /* Form Styling */
+  form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  form .form-control {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  form .form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+  }
+
+  form .boxed-btn3 {
+    background-color: #6a11cb;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+  }
+
+  form .boxed-btn3:hover {
+    background-color: #5a10b6;
+  }
+</style>
+{% endblock %}
+
+{% block title %}Post A Job{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="bradcam_area bradcam_bg_1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="bradcam_text">
+          <h3>Post A New Job</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Header -->
+
+<!-- Form Section -->
+<div class="container mt-5 mb-5">
+  <form action="" method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 600px;">
+    {% csrf_token %}
+    {{ job_form.as_p }}
+    <button type="submit" class="boxed-btn3 mx-auto mt-3">Submit Job</button>
+  </form>
+</div>
+<!-- /Form Section -->
+{% endblock %}
